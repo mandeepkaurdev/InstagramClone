@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://user:password3@ds135532.mlab.com:35532/heroku_wlbjj639', { useNewUrlParser: true });
+mongoose.connect('mongodb://user:password3@ds023478.mlab.com:23478/heroku_wb8x471d', { useNewUrlParser: true });
 
 require('./routes/api-routes')(app);
 require('./routes/html-routes')(app);
