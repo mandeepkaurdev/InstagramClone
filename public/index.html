@@ -9,10 +9,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
+  
+  <script src="https://code.jquery.com/jquery.js"></script>
+ <script src="app.js"></script>
+
   <title>Instagram Clone</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-
 </head>
 
 <body>
@@ -22,7 +23,7 @@
     <div class="container">
       <div class="profile">
         <div class="profile-image">
-          <img src="image/leaf.jpg" alt="leaf">
+          <img src="./Image/leaf.jpg" alt="leaf">
         </div>
 
 
@@ -55,7 +56,21 @@
 
     <div class="container">
 
-      
+      <div class="gallery">
+
+
+        <div class="gallery-item" tabindex="0">
+          <img src="./Image/blank.jpg" class="gallery-image" alt="">
+
+          <div class="gallery-item-info">
+            <ul>
+              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart"
+                  aria-hidden="true"></i> <img src="image/heart.png" class="heart" alt=""></li>
+              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment"
+                  aria-hidden="true"></i> <img src="image/comment.png" class="comment" alt=""></li>
+            </ul>
+          </div>
+        </div>
 
 
         <div class="gallery-item" tabindex="0">
@@ -69,14 +84,13 @@
           </div>
 
       </div>
-
+      
+      <div id="result"></div>
 
       <!-- <div class="loader"></div> -->
     </div>
 
   </main>
-
-  <script src="app.js"></script>
 
 </body>
 
