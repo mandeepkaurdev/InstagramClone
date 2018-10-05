@@ -2,6 +2,11 @@ const db = require('../models');
 
 module.exports = function (app) {
 
+    app.get('/api/instagram', function(req, res){
+        res.send("welcome!");
+      });
+      
+
 
     app.post('/add', function (req, res) {
         db.create(req.body)
