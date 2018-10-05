@@ -4,20 +4,21 @@ const Schema = mongoose.Schema;
 
 const InstagramSchema = new Schema({
 
-  photos: {
+  photo_url: {
     type: String,
-    required: "You must upload a photo"
+    unique: true,
+    required: "You must upload a photo."
   },
 
   likes: {
-    type: String,
+    type: Number,
+    default: 0,
   },
 
-  comments: {
+  comments: [{
     type: String,
     trim: true,
-  },
-
+  }]
 });
 
 const Instagram = mongoose.model("Instagram", InstagramSchema);
