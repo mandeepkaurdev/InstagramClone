@@ -7,13 +7,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
-  
+
   <script src="https://code.jquery.com/jquery.js"></script>
- <script src="app.js"></script>
+  <script src="app.js"></script>
 
   <title>Instagram Clone</title>
+
 </head>
 
 <body>
@@ -30,7 +32,7 @@
         <div class="profile-user-settings">
           <h1 class="profile-user-name">instagram clone</h1>
           <button class="btn profile-edit-btn">Edit Profile</button>
-          <!-- <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button> -->
+          <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
         </div>
 
 
@@ -44,13 +46,14 @@
 
 
         <div class="profile-bio">
-          <!-- <p><span class="profile-real-name">Instagram Clone</span></p> -->
+          <p><span class="profile-real-name">Instagram Clone</span></p>
         </div>
+
       </div>
     </div>
 
-
   </header>
+
 
   <main>
 
@@ -62,33 +65,15 @@
         <div class="gallery-item" tabindex="0">
           <img src="./Image/blank.jpg" class="gallery-image" alt="">
 
-          <div class="gallery-item-info">
-            <ul>
-              <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart"
-                  aria-hidden="true"></i> <img src="image/heart.png" class="heart" alt=""></li>
-              <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment"
-                  aria-hidden="true"></i> <img src="image/comment.png" class="comment" alt=""></li>
-            </ul>
-          </div>
-        </div>
+          <div class="heartcomment"><img src="./Image/heart.png">
+            <img src="./Image/comment.png"></div>
 
-
-        <div class="gallery-item" tabindex="0">
-          <img src="https://images.unsplash.com/photo-1505058707965-09a4469a87e4?w=500&h=500&fit=crop" class="gallery-image"
-            alt="">
         </div>
-<!-- <div class="gallery-item-info"> -->
-          <div class="icons">
-              <i class="far fa-heart"></i>
-              <i class="far fa-comment"></i>
-          </div>
 
       </div>
-      
-      <div id="result"></div>
-
-      <!-- <div class="loader"></div> -->
     </div>
+
+    <div id="result"></div>
 
   </main>
 
