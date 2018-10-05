@@ -19,7 +19,6 @@ const InstagramSchema = new Schema({
     type: String,
     trim: true,
   }]
-
 });
 
 const Instagram = mongoose.model("Instagram", InstagramSchema);
