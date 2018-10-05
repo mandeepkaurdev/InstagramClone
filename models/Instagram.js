@@ -11,15 +11,14 @@ const InstagramSchema = new Schema({
   },
 
   likes: {
-    type: String,
-    unique: true,
+    type: Number,
+    default: 0,
   },
 
-  comments: {
+  comments: [{
     type: String,
     trim: true,
-    unique: true,
-  },
+  }]
 
 });
 
