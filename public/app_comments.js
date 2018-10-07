@@ -5,8 +5,7 @@ $(function () {
             $('#allComments').empty();
             $.ajax({ url: '/api/instagram', method: 'GET' })
                 .then(function (allComments) {
-                console.log('allComments')
-
+                console.log('all Comments')
                     })
                 }
             
