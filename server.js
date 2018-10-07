@@ -10,11 +10,6 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-app.use((req, res, next) =>{
-  res.status(200).json({
-    message: 'It works!'
-  });
-});
 
 mongoose.connect('mongodb://user:password3@ds023478.mlab.com:23478/heroku_wb8x471d', { useNewUrlParser: true });
 
