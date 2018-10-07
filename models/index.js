@@ -1,3 +1,5 @@
 module.exports = {
-  Instagram: require("./Instagram")
+  photos: require("./photos"),
+  likes: require("./likes"),
+  comments: require("./comments")
 };
