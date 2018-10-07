@@ -167,9 +167,10 @@ img {
 
 .heartcomment {
   background-color: white;
-  height: 150px;
+  height: 70px;
   padding: 20px;
   width: 100%;
+  display: flex;
 }
 
 
@@ -178,7 +179,22 @@ img {
   height: 100%;
   object-fit: cover;
 }
+input[type="text"] {
+    width: 821px;
+    height: 40px;
+    padding-right: 50px;
+    border: none;
+}
 
+input[type="submit"] {
+    margin-left: -55px;
+    height: 25px;
+    width: 50px;
+    color: gray;
+    border: none;
+    background-color: white;
+    
+}
 
 @media screen and (max-width: 40rem) {
 
