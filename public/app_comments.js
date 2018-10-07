@@ -4,12 +4,8 @@ $(function () {
         const allComments = function () {
             $('#allComments').empty();
             $.ajax({ url: '/api/instagram', method: 'GET' })
-                .then(function (newComment) {
-                    newComment.forEach(ele => {
-                        $('p').html();
-                    });
-                // console.log('new comment')
-
+                .then(function (allComments) {
+                console.log('all Comments')
                     })
                 }
             
@@ -18,8 +14,7 @@ $(function () {
         const postItem = function (newComment) {
             $.ajax({ url: '/api/instagram', method: 'POST', data: newComment })
                 .then(function (comments) {
-                let commentname = $('#newComment').val();
-                    $('#allComments').append($($,{commentname}))
+                
                 })
     
     
