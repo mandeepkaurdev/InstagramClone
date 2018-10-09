@@ -10,8 +10,7 @@
 
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
-
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
   <title>Instagram Clone</title>
 
@@ -60,33 +59,38 @@
 
       <div class="gallery">
 
-
         <div class="gallery-item" tabindex="0">
           <img src="./Image/blank.jpg" class="gallery-image" alt="">
 
-          <div class="heartcomment"><img class="icon" src="./Image/heart.png">
-            <img class="icon" src="./Image/comment.png"></div>
+          <div class="heartcomment">
+            <i class="far fa-heart empty"></i>
+            <i class="fas fa-heart red"></i>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="far fa-comment"></i>
+          </div>
+
           <div class="allComments">
-            <!--all new comments will display here--> 
+            <!--all new comments will display here-->
           </div>
           <div class="commentInput">
             <input type="text" placeholder="place your comment here" class="newComment" />
             <!--adding just submit button for now, later can try to add popup for more options-->
-            <input type="submit" class="post"/>
+            <input type="submit" class="post" />
           </div>
-       
 
 
+
+        </div>
       </div>
-    </div>
 
-    <div id="result"></div>
+      <div id="result"></div>
 
   </main>
 
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="app.js"></script>
-  <script src="comment_app.js"></script>
+  <script src="app_comments.js"></script>
+  <script src="app_likes.js"></script>
 </body>
 
 </html>
