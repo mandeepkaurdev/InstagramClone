@@ -2,19 +2,26 @@ $(function () {
 
         
         const allComments = function () {
-            $('#allComments').empty();
+            // $('#allComments').empty();
             $.ajax({ url: '/api/instagram', method: 'GET' })
                 .then(function (allComments) {
-                console.log('all Comments')
-                    })
-                }
-            
-    allComments();
+                // let htmlstr = '';
+                // allComments.forEach(ele => {
+                //     htmlstr = `<div> ${ele.comments}</div>`;
 
-        const postItem = function (newComment) {
-            $.ajax({ url: '/api/instagram', method: 'POST', data: newComment })
-                .then(function (comments) {
+                // // console.log('all comments')
+                //  });
+                //  $('#allComments').html(htmlstr)
+                console.log('all added comments')
+                 })
                 
+                }
+                allComments();
+
+        const postItem = function (allComment) {
+            $.ajax({ url: '/api/instagram', method: 'POST', datatype: text })
+                .then(function (comments) {
+                    $('#allComments').append($(`<div>`,{text: $('#newComment').val()}`</div>`))
                 })
     
     

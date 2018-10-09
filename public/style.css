@@ -47,6 +47,9 @@ img {
   outline: 0.5rem auto #4d90fe;
 }
 
+.commentInput {
+  height: 100px
+}
 
 .profile {
   padding: 5rem 0;
