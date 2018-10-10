@@ -14,8 +14,18 @@ $(function () {
             })
     };
 
+    const addNewPhoto = () => {
+        const addedURL = 
+        $.ajax({url: 'api/photos', method: 'POST', data: {photo_url: addedURL}})
+        .then(function(data){
+            displayContent();
+        });
+    };
+
     displayContent();
 
-   // $('#addNew').on("click", addNewPic);
+   $('#addPhoto').on("click", function(){$('#inputUploadPhoto').click();});
+   $('#inputUploadPhoto').on("change", function(){$('#frmUpload').submit();});
+
 })
 
