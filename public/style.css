@@ -213,16 +213,16 @@ img {
 
 /* Jules-css-starts */
 input[type="text"] {
-    width: 821px;
+    width: 80%;
     height: 40px;
     padding-right: 50px;
     border: none;
 }
 
 input[type="submit"] {
-    margin-left: -55px;
-    height: 25px;
-    width: 50px;
+    margin-left: -3.5px;
+    height: 40px;
+    width: 20%;
     color: gray;
     border: none;
     background-color: white;

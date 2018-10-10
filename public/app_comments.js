@@ -3,8 +3,10 @@ $(function () {
         
         const allComments = function () {
             // $('#allComments').empty();
-            $.ajax({ url: '/api/instagram', method: 'GET' })
+            $.ajax({ url: '/api/comments', method: 'GET' })
                 .then(function (allComments) {
+                    console.log("app_comments.js allcomments: ");
+                    console.log(allComments);
                 // let htmlstr = '';
                 // allComments.forEach(ele => {
                 //     htmlstr = `<div> ${ele.comments}</div>`;
@@ -19,9 +21,13 @@ $(function () {
                 allComments();
 
         const postItem = function (allComment) {
-            $.ajax({ url: '/api/instagram', method: 'POST', datatype: text })
+            const userData = {userComment : allComment}
+            $.ajax({ url: '/api/comments', method: 'POST', data:userData })
                 .then(function (comments) {
-                    $('#allComments').append($(`<div>`,{text: $('#newComment').val()}`</div>`))
+                    console.log("app_comments line 26")
+                    console.log(comments)
+                    console.log('submitted comment '+ allComment)
+                    // $('#allComments').append($(`<div>`,{text: $('#newComment').val()}`</div>`))
                 })
     
     
@@ -39,12 +45,11 @@ $(function () {
         //         })
         // }
     
-        $('#post').on('click', function () {
+        $('.post').on('click', function () {
     
-            const val = $('#newComment').val()
+            const val = $('.newComment').val()
             postItem(val)
     
             //  remove();   
         });
     });
-    
