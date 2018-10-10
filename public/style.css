@@ -31,6 +31,35 @@ img {
   padding: 0 2rem;
 }
 
+/* gina-css-start */
+.big-icon{
+  font-size: 3rem;
+  background: none;
+  border:none;
+  padding:none;
+  cursor: pointer;
+  outline: 0;
+ }
+.nav-bottom {
+  background-color: #eee;
+  border-top: solid 1px rgb(219, 219, 219);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+}
+.nav-ul-bottom{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+}
+.nav-li-bottom{
+  display: inline;
+  margin: 40px;
+}
+/* gina-css-end */
 
 .btn {
   display: inline-block;
@@ -173,7 +202,6 @@ img {
   height: 70px;
   padding: 20px;
   width: 100%;
-  display: flex;
 }
 
 
@@ -182,6 +210,8 @@ img {
   height: 100%;
   object-fit: cover;
 }
+
+/* Jules-css-starts */
 input[type="text"] {
     width: 821px;
     height: 40px;
@@ -197,6 +227,8 @@ input[type="submit"] {
     border: none;
     background-color: white;
 }
+
+/* Jules-css-ends */
 
 @media screen and (max-width: 40rem) {
 
