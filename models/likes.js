@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const likesSchema = new Schema({
 
   likes: {
-    type: Number,
-    default: 0,
+    type: Boolean,
+    default: false
   }
 });
 

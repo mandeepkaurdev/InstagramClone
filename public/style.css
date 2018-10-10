@@ -190,14 +190,14 @@ img {
   flex: 1 0 22rem;
   margin: 1rem;
   color: #fff;
-  cursor: pointer;
 }
 
 
 .heartcomment {
   background-color: white;
   height: 70px;
-  padding: 20px;
+  padding-left: 10px;
+  padding-top: 10px;
   width: 100%;
 }
 
@@ -224,8 +224,19 @@ input[type="submit"] {
     border: none;
     background-color: white;
 }
-
 /* Jules-css-ends */
+
+/*vlee-css-starts*/
+i {
+  color: rgb(122, 122, 122);
+  font-size: 4rem;
+}
+
+.red {
+  color: red;
+}
+/*vlee-css-ends*/
+
 
 @media screen and (max-width: 40rem) {
 

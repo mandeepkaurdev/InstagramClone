@@ -10,7 +10,8 @@
 
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
 
   <title>Instagram Clone</title>
 
@@ -59,39 +60,42 @@
 
       <div class="gallery">
 
-
         <div class="gallery-item" tabindex="0">
-            <img src="./Image/blank.jpg" class="gallery-image" alt="">
+          <img src="./Image/blank.jpg" class="gallery-image" alt="">
 
-            <div class="heartcomment"><img class="icon" src="./Image/heart.png">
-              <img class="icon" src="./Image/comment.png">
+            <div class="heartcomment">
+              <i class="far fa-heart empty"></i>
+              <i class="fas fa-heart red"></i>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <i class="far fa-comment"></i>
             </div>
+
             <div class="allComments">
-              <!--all new comments will display here--> 
+              <!--all new comments will display here-->
             </div>
             <div class="commentInput">
-                <input type="text" placeholder="place your comment here" class="newComment" />
-                <!--adding just submit button for now, later can try to add popup for more options-->
-                <input type="submit" class="post"/>
-            </div> 
-            <div style="height: 50px"></div> 
+              <input type="text" placeholder="place your comment here" class="newComment" />
+              <!--adding just submit button for now, later can try to add popup for more options-->
+              <input type="submit" class="post" />
+            </div>
+            <div style="height: 50px"></div>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- gina bottom nav start-->
-    <div>    
+      <!-- gina bottom nav start-->
+      <div>
         <nav class='nav-bottom'>
-            <ul class='nav-ul-bottom'>
-              <li class='nav-li-bottom'><button class='big-icon' onclick="location.href = 'index.html'"><i class="fas fa-home"></i></button></li>
-              <li class='nav-li-bottom'><button class='big-icon' id="addPhoto"><i class="far fa-plus-square"></i></button></li>
-              <li class='nav-li-bottom'><button class='big-icon' onclick="location.href = 'index.html'"><i class="far fa-user"></i></button></li>               
-            </ul>
-          </nav>      
-    </div>
-    <form id="frmUpload" style="display:none" action="/api/photo" method="post" enctype="multipart/form-data">
-      <input type="file" id="inputUploadPhoto" name="inputUploadPhoto"/>
-    </form>
-    <!-- gina bottom nav end-->
+          <ul class='nav-ul-bottom'>
+            <li class='nav-li-bottom'><button class='big-icon' onclick="location.href = 'index.html'"><i class="fas fa-home"></i></button></li>
+            <li class='nav-li-bottom'><button class='big-icon' id="addPhoto"><i class="far fa-plus-square"></i></button></li>
+            <li class='nav-li-bottom'><button class='big-icon' onclick="location.href = 'index.html'"><i class="far fa-user"></i></button></li>
+          </ul>
+        </nav>
+      </div>
+      <form id="frmUpload" style="display:none" action="/api/photo" method="post" enctype="multipart/form-data">
+        <input type="file" id="inputUploadPhoto" name="inputUploadPhoto" />
+      </form>
+      <!-- gina bottom nav end-->
 
   </main>
 
