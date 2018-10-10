@@ -227,7 +227,9 @@ input[type="submit"] {
     border: none;
     background-color: white;
 }
-
+.allComments {
+  color: black;
+}
 /* Jules-css-ends */
 
 @media screen and (max-width: 40rem) {

@@ -7,6 +7,7 @@ $(function () {
                 .then(function (allComments) {
                     console.log("app_comments.js allcomments: ");
                     console.log(allComments);
+                    $('.allComments').text(allComments)
                 // let htmlstr = '';
                 // allComments.forEach(ele => {
                 //     htmlstr = `<div> ${ele.comments}</div>`;
@@ -14,7 +15,7 @@ $(function () {
                 // // console.log('all comments')
                 //  });
                 //  $('#allComments').html(htmlstr)
-                console.log('all added comments')
+                // console.log('all added comments')
                  })
                 
                 }
@@ -24,8 +25,8 @@ $(function () {
             const userData = {userComment : allComment}
             $.ajax({ url: '/api/comments', method: 'POST', data:userData })
                 .then(function (comments) {
-                    console.log("app_comments line 26")
-                    console.log(comments)
+                    // console.log("app_comments line 26")
+                    // console.log(comments)
                     console.log('submitted comment '+ allComment)
                     // $('#allComments').append($(`<div>`,{text: $('#newComment').val()}`</div>`))
                 })

@@ -37,8 +37,8 @@ module.exports = function (app) {
     });
 
     app.post('/api/comments', function (req, res) {
-        console.log('api-route line 40: ')
-        console.log(req.body)
+        // console.log('api-route line 40: ')
+        // console.log(req.body)
         db.eachComment.create(req.body)
             .then(function (comments) {
                 res.json(comments);
