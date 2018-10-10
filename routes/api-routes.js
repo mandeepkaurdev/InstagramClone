@@ -1,17 +1,29 @@
 const db = require('../models/index');
 
+// gina code starts
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'myPicFolder');
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + file.originalname);   
+    }
+});
+const upload = multer({storage: storage});
+// gina code ends
+
 module.exports = function (app) {
 
-
-
-    app.post('/api/photos', function (req, res) {
-        db.photos.create(req.body)
-            .then(function (photos) {
-                res.json(photos);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
+    app.post('/api/photo', upload.single('inputUploadPhoto'), function (req, res, next) {
+        res.redirect(req.protocol + '://' + req.get('host'));
+        // db.photos.create(req.body)
+        //     .then(function (photos) {
+        //         res.json(photos);
+        //     })
+        //     .catch(function (err) {
+        //         res.json(err);
+        //     });
     });
 
     app.post('/api/likes', function (req, res) {
