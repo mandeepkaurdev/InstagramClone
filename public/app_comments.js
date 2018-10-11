@@ -39,7 +39,7 @@ $(function () {
                 })
     
     
-            $('#allComments')
+            $('.allComments')
         }
     
         // const remove = function (remove) {
