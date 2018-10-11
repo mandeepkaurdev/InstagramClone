@@ -73,7 +73,9 @@ module.exports = function (app) {
     });
 
     app.post('/api/comments', function (req, res) {
-        db.comments.create(req.body)
+        // console.log('api-route line 40: ')
+        // console.log(req.body)
+        db.eachComment.create(req.body)
             .then(function (comments) {
                 res.json(comments);
             })
@@ -97,7 +99,7 @@ module.exports = function (app) {
     });
 
     app.get('/api/comments', function (req, res) {
-        db.comments.find({})
+        db.eachComment.find({})
             .then(function (comments) {
                 res.json(comments);
             })
