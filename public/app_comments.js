@@ -7,7 +7,15 @@ $(function () {
                 .then(function (allComments) {
                     console.log("app_comments.js allcomments: ");
                     console.log(allComments);
-                    $('.allComments').text(allComments)
+                    // JSON.stringify(allComments)
+                    let htmlstr = '';
+                   allComments.forEach(ele => {
+                        htmlstr += `<div> ${ele.userComment}`
+                   })
+                   $('.allComments').html(htmlstr)
+                    
+                    
+                   
                 // let htmlstr = '';
                 // allComments.forEach(ele => {
                 //     htmlstr = `<div> ${ele.comments}</div>`;
@@ -24,7 +32,7 @@ $(function () {
         const postItem = function (allComment) {
             const userData = {userComment : allComment}
             $.ajax({ url: '/api/comments', method: 'POST', data:userData })
-                .then(function (comments) {
+                .then(function () {
                     // console.log("app_comments line 26")
                     // console.log(comments)
                     console.log('submitted comment '+ allComment)
@@ -46,8 +54,7 @@ $(function () {
         //         })
         // }
     
-        $('.post').on('click', function () {
-    
+        $('.post').on('click', function () {    
             const val = $('.newComment').val()
             postItem(val)
     
