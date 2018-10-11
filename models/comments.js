@@ -9,7 +9,12 @@ const commentsSchema = new Schema({
     ref: "eachComment",
     trim: true,
 
-  }]
+  }],
+  
+  userComment: {
+    type: String,
+
+  }
   
 });
 

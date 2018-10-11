@@ -80,6 +80,9 @@ img {
   outline: 0.5rem auto #4d90fe;
 }
 
+.commentInput {
+  height: 100px
+}
 
 .profile {
   padding: 5rem 0;
@@ -214,19 +217,23 @@ img {
 
 /* Jules-css-starts */
 input[type="text"] {
-    width: 821px;
+    width: 80%;
     height: 40px;
     padding-right: 50px;
     border: none;
 }
 
 input[type="submit"] {
-    margin-left: -55px;
-    height: 25px;
-    width: 50px;
+    margin-left: -3.5px;
+    height: 40px;
+    width: 20%;
     color: gray;
     border: none;
     background-color: white;
+}
+.allComments {
+  color: black;
+  background-color: white;
 }
 /* Jules-css-ends */
 
