@@ -7,14 +7,13 @@ $(function () {
                 .then(function (allComments) {
                     console.log("app_comments.js allcomments: ");
                     console.log(allComments);
-                    // JSON.stringify(allComments)
                     let htmlstr = '';
                    allComments.forEach(ele => {
                         htmlstr += `<div> ${ele.userComment}`
                    })
                    $('.allComments').html(htmlstr)
                     
-                    
+              
                    
                 // let htmlstr = '';
                 // allComments.forEach(ele => {
@@ -35,8 +34,8 @@ $(function () {
                 .then(function () {
                     // console.log("app_comments line 26")
                     // console.log(comments)
-                    console.log('submitted comment '+ allComment)
-                    // $('#allComments').append($(`<div>`,{text: $('#newComment').val()}`</div>`))
+                    console.log('submitted comment: '+ allComment)
+                    $('.allComments').append($(`<div>${$('.newComment').val()}</div>`))
                 })
     
     
