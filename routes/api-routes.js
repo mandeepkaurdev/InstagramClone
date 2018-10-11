@@ -4,27 +4,63 @@ const db = require('../models/index');
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'myPicFolder');
+        cb(null, 'public/myPicFolder');
     },
     filename: function(req, file, cb) {
         cb(null, Date.now() + file.originalname);   
     }
 });
 const upload = multer({storage: storage});
-// gina code ends
+
 
 module.exports = function (app) {
 
-    app.post('/api/photo', upload.single('inputUploadPhoto'), function (req, res, next) {
-        res.redirect(req.protocol + '://' + req.get('host'));
-        // db.photos.create(req.body)
-        //     .then(function (photos) {
-        //         res.json(photos);
-        //     })
-        //     .catch(function (err) {
-        //         res.json(err);
-        //     });
+    app.get('/api/photos', function (req, res) {
+        db.photos.find({})
+            .then(function (photos) {
+                res.json(photos);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
     });
+
+    app.post('/api/photo', upload.single('inputUploadPhoto'), function (req, res, next) {
+        db.photos.create({"photo_url": (req.file.path).replace('public', '')})
+            .then(function (photos) {
+                //console.log((req.file.path).replace('public', ''));
+                res.json(photos);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+
+        res.redirect(req.protocol + '://' + req.get('host'));
+    });
+
+    app.delete('/api/photo/:index', function (req, res) {
+        console.log(req.params.index);
+        db.photos.findByIdAndDelete({_id: req.params.index})
+            .then(function (photos) {
+                console.log(photos);
+                res.json(photos);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
+// gina code ends
+
+
+
+
+
+
+
+
+
+
 
     app.post('/api/likes', function (req, res) {
         db.likes.create(req.body)
@@ -48,15 +84,7 @@ module.exports = function (app) {
 
 
 
-    app.get('/api/photos', function (req, res) {
-        db.photos.find({})
-            .then(function (photos) {
-                res.json(photos);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
+
 
     app.get('/api/likes', function (req, res) {
         db.likes.find({})
@@ -80,15 +108,7 @@ module.exports = function (app) {
 
 
 
-    app.delete('/api/photos', function (req, res) {
-        db.photos.findOneAndDelete(req.body)
-            .then(function (photos) {
-                res.json(photos);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
+
 
     app.delete('/api/likes', function (req, res) {
         db.likes.findOneAndDelete(req.body)
