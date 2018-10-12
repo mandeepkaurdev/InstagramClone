@@ -1,6 +1,6 @@
 module.exports = {
   photos: require("./photos"),
-  likes: require("./likes"),
+  //likes: require("./likes"),
   comments: require("./comments"),
   eachComment: require("./eachComment")
 };
