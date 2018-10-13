@@ -75,9 +75,16 @@ module.exports = function (app) {
     app.post('/api/comments', function (req, res) {
         // console.log('api-route line 40: ')
         // console.log(req.body)
+
         db.eachComment.create(req.body)
-            .then(function (comments) {
+        // db.eachComment.create({comments: req.body.eachComment})
+        .then(function (comments) {
                 res.json(comments);
+            return db.photos.findOneAndUpdate({}, { $push: { eachComment: eachComment._id } }, { new: true })
+
+            })
+            .then(function (photos){
+                res.json(photos)
             })
             .catch(function (err) {
                 res.json(err);
