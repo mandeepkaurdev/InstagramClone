@@ -8,7 +8,6 @@ var Schema = mongoose.Schema;
 var commentSchema = new Schema({
   // `body` must be of type String
   userComment: String,
-  // photo_url: req.body.url
 });
 
 // This creates our model from the above schema, using mongoose's model method
