@@ -244,6 +244,7 @@ input[type="submit"] {
     background-color: white;
 }
 .allComments {
+  font-size: 1.6rem;
   color: black;
   background-color: white;
 }
