@@ -2,7 +2,6 @@ $(function () {
 
         
     const allComments = function () {
-        // $('#allComments').empty();
         $.ajax({ url: '/api/comments', method: 'GET' })
             .then(function (allComments) {
                 console.log("app_comments.js allcomments: ");
@@ -19,11 +18,12 @@ $(function () {
             allComments();
 
     const postItem = function (allComment) {
+        //add photo_url to the object below
         const userData = {userComment : allComment}
         $.ajax({ url: '/api/comments', method: 'POST', data:userData })
             .then(function () {
                 console.log('submitted comment: '+ allComment)
-                $('.allComments').append($(`<div> ${'Instagram clone' ,$('.newComment').val()}<i class=""></i></div>`))
+                $('.allComments').append($(`<div> ${$('.newComment').val()}</div>`))
             })
 
 
