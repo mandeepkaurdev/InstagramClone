@@ -1,5 +1,4 @@
-
-$(function () {
+$(function(){
     function render(userContent) {
         $('#galleryList').html(userContent);
     }
@@ -11,7 +10,8 @@ $(function () {
                 if (data != ''){         
                     data.forEach(e => content += `<img src='${e.photo_url}' class='gallery-image'>
                         <div class="heartcomment">
-                        <i class="fas fa-heart empty"></i>
+                        <i class="far fa-heart empty" id=${e._id}_empty></i>
+                        <i class="fas fa-heart red" style="display:none; color: red;" id=${e._id}_red></i>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i class="far fa-comment"></i>
                         <button photoId='${e._id}' class='remove big-icon'><i class="fas fa-times"></i></button>
@@ -48,5 +48,5 @@ $(function () {
             });
    })
 
-})
 
+})

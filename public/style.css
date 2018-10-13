@@ -85,7 +85,6 @@ img {
   cursor: pointer;
 }
 
-
 .btn:focus {
   outline: 0.5rem auto #4d90fe;
 }
@@ -254,10 +253,6 @@ input[type="submit"] {
 i {
   color: rgb(122, 122, 122);
   font-size: 4rem;
-}
-
-.red {
-  color: red;
 }
 /*vlee-css-ends*/
 
