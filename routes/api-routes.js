@@ -2,6 +2,7 @@ const db = require('../models/index');
 
 // gina code starts
 const multer = require('multer');
+const fs = require('fs');
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, 'public/myPicFolder');
@@ -41,8 +42,17 @@ module.exports = function (app) {
     app.delete('/api/photo/:index', function (req, res) {
         console.log(req.params.index);
         db.photos.findByIdAndDelete({_id: req.params.index})
-            .then(function (photos) {
-                console.log(photos);
+            .then(function (photo) {
+                let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\","");
+                console.log(imgPathToDelete);
+                fs.unlink(imgPathToDelete, (err) => {
+                    console.log("here fs.unlink");
+                    if (err) {
+                        console.log("failed to delete local image:"+err);
+                    } else {
+                        console.log('successfully deleted local image');                                
+                    }
+                });
                 res.json(photos);
             })
             .catch(function (err) {
