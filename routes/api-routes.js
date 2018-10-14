@@ -83,33 +83,26 @@ module.exports = function (app) {
     });
 
     app.post('/api/comments', function (req, res) {
-        // console.log('api-route line 40: ')
-        // console.log(req.body)
-
         //we need req.body to have userComment and also photoUrl
         /*{
              userComment: "I like this photo",
              photo_url: '15675645647647.jpg'
         }*/
-
         db.eachComment.create({userComment: req.body.userComment})
-        // db.eachComment.create({comments: req.body.eachComment})
         .then(function (comments) {
-                res.json(comments);
+            console.log(req.body)
             return db.photos.findOneAndUpdate({photo_url: req.body.photo_url}, { $push: { comments: comments._id } }, { new: true })
 
             })
+            
             .then(function (photos){
+                console.log(photos)
                 res.json(photos)
             })
             .catch(function (err) {
                 res.json(err);
             });
     });
-
-
-
-
 
     app.get('/api/likes', function (req, res) {
         db.likes.find({})

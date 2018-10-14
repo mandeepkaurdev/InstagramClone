@@ -19,8 +19,10 @@ $(function(){
                         
                         <div class="allComments"></div>
                         <div class="commentInput">
+                        <form onSubmit="enterKey(); return false">
                         <input type="text" placeholder="place your comment here" class="newComment" />
-                        <input type="submit" class="post"  /></div> 
+                        <input type="submit" class="post" />
+                        </form></div> 
                         <div style="height: 50px"></div>`
 
                     );

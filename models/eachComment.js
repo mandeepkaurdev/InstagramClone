@@ -7,6 +7,7 @@ var Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 var commentSchema = new Schema({
   // `body` must be of type String
+  // userName: 'InstagramClone',
   userComment: String,
 });
 
