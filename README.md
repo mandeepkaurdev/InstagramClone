@@ -1,63 +1,103 @@
 # Instagram Clone
 
-#### Difficulty Level: 2
+Instagram Clone is a full-stack application, built in collaboration with Gina Yi, Veronica Lee, Juliana Tyler and Mandeep Kaur. Our team chose this project because we wanted to built something we love. The intent of this project was to create a clone of Instagram, a photo sharing app with features of upload, like and comment the photos.
 
-
-# Instructions
-
-Your job is to create a clone of Instagram. The design and functionality should match Instagram exactly. This is not the time to get creative. This is the time to show off your ability to match design and project specs. 
 
 
 # Project Requirements
 
-Each member must own 1 user story (except the lead engineer). That member of the team is solely responsible for the functionality of that feature and will be graded predominantly on that features success.
+## Build an MVP with following functionalities.
 
-Each member must participate in a daily scrum (every day including weekends unless religious beliefs prevent them from doing so). 
+1. Ability to upload and delete photos.
+2. Ability to like and unlike photos.
+3. Ability to add comments to photos.
 
-All projects must match the color scheme, fonts (as closely as possible), and layout of the assigned website.
 
-All projects must include a mobile layout in addition to a desktop layout. 
 
-Projects are *not* required to include secure login. 
+# Technology Requirements
 
-Projects must include a README markdown file with detailed documentation. 
+### HTML, CSS, JavaScript, Node.js, Express, MongoDB, GitHub, Heroku
 
-Project repos must have a protected master branch and require code review before merge.
 
-All files must use JSDoc style documentation. 
+
+# Lead Engineer: Mandeep Kaur
+
+## Responsibilities:
+
+1. Set up and configured GitHub repo.
+2. Created all database models.
+3. Set up a get, post, put, and delete route for all resources.
+4. Managed deployment.
+5. Turned MVP functionalities to granular stories, opened "Issues" to track the progress.
+6. Created the basic stylesheet for the application (grid, color, font, graphic assets).
+    ![Desktop Version](Images/Desktop.png)
+    ![Mobile Version](Images/Mobile.png)
+7. Architecture plan for the application using a components diagram.
+    ![Architecture Image 1](Images/1.jpg)
+    ![Architecture Image 2](Images/2.jpg)
+    ![Architecture Image 3](Images/3.jpg)
+
 
 
 # MVP
 
-Your MVP includes the following functionality. Your project is not complete until all of the below features are working:
-
-1. Ability to upload and delete photos, that render to the page
-2. Ability to like and unlike photos
-3. Ability to add comments to photos
+Each team member participated in a daily scrum, owned 1 user story.
 
 
-# Additional Functionality
+# Team Member: Gina Yi
 
-If you have a 5th teammate, you must complete one of the features listed below. If you complete the above functionality early, you may select additional functionality from the list below, or you may choose your own feature to add. 
+## Responsibility: Built a feature with functionality that upload and delete photos.
 
-1. Multi-user functionality
-2. Ability to follow other users
-3. Ability to add stories
-4. Ability to @ users to notify them in comments
-5. Ability to DM users
+### Granular Stories:
+1. Uploaded photos that render to the page.
+2. Saved photos on the server and database.
+3. Get photos from the server and database.
+4. Deleted photos that render to the page.
+
+![Upload Photo](Images/GY.png)
 
 
-# Lead Engineer
 
-Every team must have a lead engineer (unless an instructional staff member is acting as your team's lead). The lead engineer is ultimately responsible for the success of the entire application. The lead has several responsibilities:
+# Team Member: Veronica Lee
 
-1. Architect the application using a components diagram. 
-2. Create all database models.
-3. Seed the database if needed.
-4. Set up a get, post, put, and delete route for all resources.
-5. Create the basic stylesheet for the application (grid, color, font, graphic assets).
-6. Act as scrum master. 
-7. Report to team TA daily. 
-8. Pair with teammates as needed.
-9. Set up and configure GitHub repo.
-10. Manage deployment.
+## Responsibility: Built a feature with functionality that like and unlike photos.
+
+### Granular Stories:
+1. Liked photos and recognized when like button is clicked.
+2. Saved likes on the server and database.
+3. Get likes from the server and database.
+4. Unliked photos update on the server and database.
+
+![Like Photo](Images/VL.png)
+
+
+
+# Team Member: Juliana Tyler
+
+## Responsibility: Built a feature with functionality that add comments to photos.
+
+### Granular Stories:
+
+1. Added comments to photos that render to the page.
+2. Saved comments on the server and database.
+3. Get comments from the server and database.
+
+![Comment Photo](Images/JT.png)
+
+
+
+# Next Steps
+
+## Adding additional functionality.
+
+1. Multi-user functionality.
+2. Ability to applying filters.
+3. Ability to follow other users.
+4. Ability to add stories.
+5. Ability to DM users.
+
+
+
+# Deployed Project On Heroku
+
+### https://instagramcloneproject.herokuapp.com/
