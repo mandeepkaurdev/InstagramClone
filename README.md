@@ -1,6 +1,6 @@
 # Instagram Clone
 
-Instagram Clone is a full-stack application, built in collaboration with Gina Yi, Veronica Lee, Juliana Tyler and Mandeep Kaur. Our team chose this project because we wanted to built something we love. The intent of this project was to create a clone of Instagram, a photo sharing app with features of upload, like and comment the photos.
+Instagram Clone is a full-stack application, built in collaboration with Gina Yi, Veronica Lee, Juliana Tyler and Mandeep Kaur. Our team chose this project because we wanted to built something we love. The intent of this project is to create a clone of Instagram, a photo sharing app with features of upload, like and comment the photos.
 
 
 
@@ -16,7 +16,7 @@ Instagram Clone is a full-stack application, built in collaboration with Gina Yi
 
 # Technology Requirements
 
-### HTML, CSS, JavaScript, Node.js, Express, MongoDB, GitHub, Heroku
+HTML, CSS, JavaScript, Node.js, Express, MongoDB, GitHub, Heroku
 
 
 
@@ -24,12 +24,12 @@ Instagram Clone is a full-stack application, built in collaboration with Gina Yi
 
 ## Responsibilities:
 
-1. Set up and configured GitHub repo.
-2. Created all database models.
+1. Set up and configure GitHub repo.
+2. Create all database models.
 3. Set up a get, post, put, and delete route for all resources.
-4. Managed deployment.
-5. Turned MVP functionalities to granular stories, opened "Issues" to track the progress.
-6. Created the basic stylesheet for the application (grid, color, font, graphic assets).
+4. Manage deployment.
+5. Turn MVP functionalities to granular stories, open "Issues" to track the progress.
+6. Create the stylesheet for the application (grid, color, font, graphic assets).
     ![Desktop Version](Images/Desktop.png)
     ![Mobile Version](Images/Mobile.png)
 7. Architecture plan for the application using a components diagram.
@@ -46,13 +46,13 @@ Each team member participated in a daily scrum, owned 1 user story.
 
 # Team Member: Gina Yi
 
-## Responsibility: Built a feature with functionality that upload and delete photos.
+## Responsibility: Build a feature with functionality that upload and delete photos.
 
 ### Granular Stories:
-1. Uploaded photos that render to the page.
-2. Saved photos on the server and database.
+1. Upload photos that render to the page.
+2. Save photos on the server and database.
 3. Get photos from the server and database.
-4. Deleted photos that render to the page.
+4. Delete photos that render to the page.
 
 ![Upload Photo](Images/GY.png)
 
@@ -60,13 +60,13 @@ Each team member participated in a daily scrum, owned 1 user story.
 
 # Team Member: Veronica Lee
 
-## Responsibility: Built a feature with functionality that like and unlike photos.
+## Responsibility: Build a feature with functionality that like and unlike photos.
 
 ### Granular Stories:
-1. Liked photos and recognized when like button is clicked.
-2. Saved likes on the server and database.
+1. Like photos and recognized when like button is clicked.
+2. Save likes on the server and database.
 3. Get likes from the server and database.
-4. Unliked photos update on the server and database.
+4. Unlike photos update on the server and database.
 
 ![Like Photo](Images/VL.png)
 
@@ -74,12 +74,12 @@ Each team member participated in a daily scrum, owned 1 user story.
 
 # Team Member: Juliana Tyler
 
-## Responsibility: Built a feature with functionality that add comments to photos.
+## Responsibility: Build a feature with functionality that add comments to photos.
 
 ### Granular Stories:
 
-1. Added comments to photos that render to the page.
-2. Saved comments on the server and database.
+1. Add comments to photos that render to the page.
+2. Save comments on the server and database.
 3. Get comments from the server and database.
 
 ![Comment Photo](Images/JT.png)
