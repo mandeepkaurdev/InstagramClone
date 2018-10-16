@@ -62,16 +62,6 @@ module.exports = function (app) {
 
 // gina code ends
 
-
-
-
-
-
-
-
-
-
-
     app.post('/api/likes', function (req, res) {
         db.likes.create(req.body)
             .then(function (likes) {
@@ -81,6 +71,8 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
+
+
 
     app.post('/api/comments', function (req, res) {
         //we need req.body to have userComment and also photoUrl
@@ -116,6 +108,7 @@ module.exports = function (app) {
 
     app.get('/api/comments', function (req, res) {
         db.eachComment.find({})
+            .populate('eachComment')
             .then(function (comments) {
                 res.json(comments);
             })
