@@ -1,45 +1,49 @@
-$(function () {
+$(document).ready(function(){
+    $(function () {
 
-    const allComments = function () {
-        $.ajax({ url: '/api/comments', method: 'GET' })
-            .then(function (allComments) {
-                // console.log("app_comments.js allcomments: ");
-                console.log(allComments);
-                let htmlstr = '';
-               allComments.forEach(e => {
-                    htmlstr += `<div class="DBComments">InstagramClone ${e.userComment}`
-               })
-               $('.allComments').html(htmlstr)
-             })
+
+
+    // const allComments = function () {
+    //     $.ajax({ url: '/api/photos', method: 'GET'})
+    //         .then(function (allPhotos) {
+    //             allPhotos.forEach(eachPic => {
+    //                 eachPic.comments.forEach( eachCommentOnPic => {
+    //                     console.log("line 10 app_comments.js: "+ eachCommentOnPic.userComment)
+    //                     $(`#${eachPic.id}_divForComments`).append($(`<div class="DBComments">InstagramClone ${eachCommentOnPic.userComment}</div>`))
+    //                 })
+    //             })
+    //          })
             
-            }
-            allComments();
+    //         }
+    //         allComments();
 
-    const postItem = function (allComment) {
+    const postItem = function (allComment, photoid, theComment) {
         //add photo_url to the object below
         $.ajax({ url: '/api/comments', method: 'POST', data:allComment})
             .then(function () {
-                console.log('submitted comment: '+ allComment)
-                $('.allComments').append($(`<div class="DBComments">InstagramClone ${$('.newComment').val()}</div>`))
+                console.log('submitted comment: ', allComment)
+                $(`#${photoid}_divForComments`).append($(`<div class="DBComments">InstagramClone ${theComment}</div>`))
             })
     }
 
-    $('.container').on('click','.post', function () {   
-        // const inputId = '#'+ event.target.id;
-        // const comment = inputId.split("_")[0]+"_post";
+    $('.container').on('click','.post', function (event) {
+        event.preventDefault();
+        const photoid = $(this).data('id'); 
+        const val = $(`#${photoid}_input`).val()
         const obj = {
-            userComment: $('.newComment').val(),
-            photo_url: $('.gallery-image').attr('src')
+            userComment: val,
+            photo_id: photoid
+            
         }
-        // $(inputId).show()
-        postItem(obj)      
+        postItem(obj,photoid, val)      
     });
 
-  function enterKey(event){
-      event.preventDefault()
-    //   if (event.keyCode == 13){
-        //   console.log(1)
-    //   }
-  }
+//   function enterKey(event){
+//       event.preventDefault()
+//     //   if (event.keyCode == 13){
+//           console.log(1)
+//     //   }
+//   }
 
 });
+})

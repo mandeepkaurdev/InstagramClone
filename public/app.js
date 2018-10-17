@@ -17,15 +17,27 @@ $(function(){
                         <button photoId='${e._id}' class='remove big-icon'><i class="fas fa-times"></i></button>
                         </div>
                         
-                        <div class="allComments"></div>
+                        <div class="allComments" id='${e._id}_divForComments' data-photourl="${e._id}">`+
+                        // e.comments.forEach( eachCommentOnPic => {
+                        //     console.log("line 31 app.js: "+ eachCommentOnPic.userComment)
+                        //     console.log(`#${e._id}_divForComments`)
+                        //     $(`<div class="DBComments">InstagramClone ${eachCommentOnPic.userComment}</div>`))
+                        // }) +
+                        `</div>
                         <div class="commentInput">
-                        <form onSubmit="enterKey(); return false">
-                        <input type="text" placeholder="place your comment here" class="newComment" />
-                        <input type="submit" class="post" />
+                        <form onsubmit="enterKey()">
+                        <input type="text" placeholder="place your comment here" class="newComment" id="${e._id}_input"/>
+                        <input type="submit" class="post" data-id="${e._id}"/>
                         </form></div> 
                         <div style="height: 50px"></div>`
 
                     );
+                    // data.forEach(eachPic => {
+                    //     eachPic.comments.forEach( eachCommentOnPic => {
+                    //         console.log("line 31 app.js: "+ eachCommentOnPic.userComment)
+                    //         $(`#${eachPic.id}_divForComments`).append($(`<div class="DBComments">InstagramClone ${eachCommentOnPic.userComment}</div>`))
+                    //     })
+                    // })
                 }
                 else {
                     content = `<img src="./Image/blank.jpg" class="gallery-image" alt="">`;

@@ -18,7 +18,9 @@ module.exports = function (app) {
 
     app.get('/api/photos', function (req, res) {
         db.photos.find({})
+            .populate('comments')
             .then(function (photos) {
+                console.log(photos)
                 res.json(photos);
             })
             .catch(function (err) {
@@ -78,17 +80,15 @@ module.exports = function (app) {
         //we need req.body to have userComment and also photoUrl
         /*{
              userComment: "I like this photo",
-             photo_url: '15675645647647.jpg'
+             photo_id: '15675645647647.jpg'
         }*/
         db.eachComment.create({userComment: req.body.userComment})
         .then(function (comments) {
-            console.log(req.body)
-            return db.photos.findOneAndUpdate({photo_url: req.body.photo_url}, { $push: { comments: comments._id } }, { new: true })
+            return db.photos.findOneAndUpdate({_id: req.body.photo_id}, { $push: { comments: comments._id } }, { new: true })
 
             })
             
             .then(function (photos){
-                console.log(photos)
                 res.json(photos)
             })
             .catch(function (err) {
@@ -108,7 +108,7 @@ module.exports = function (app) {
 
     app.get('/api/comments', function (req, res) {
         db.eachComment.find({})
-            .populate('eachComment')
+           
             .then(function (comments) {
                 res.json(comments);
             })
