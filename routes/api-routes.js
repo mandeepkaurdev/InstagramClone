@@ -4,10 +4,10 @@ const db = require('../models/index');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path')
-const folderPath = './public/myPicFolder/'
+const folderPath = './public/picFolder/'
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/myPicFolder/');
+        cb(null, './public/picFolder/');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + file.originalname);
@@ -23,7 +23,7 @@ module.exports = function (app) {
                 var files = fs.readdirSync(folderPath);
                 let displayPhotos = [];
                 photos.forEach((e,index) => {                                     
-                 let photoName = (e.photo_url).replace("\\myPicFolder\\", "");
+                 let photoName = (e.photo_url).replace("\\picFolder\\", "");
 
                  if(files.find(file => file == photoName)) 
                  {
@@ -51,7 +51,7 @@ module.exports = function (app) {
     app.delete('/api/photo/:index', function (req, res) {
         db.photos.findByIdAndDelete({_id: req.params.index})
             .then(function (photo) {
-                let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\","");
+                let imgPathToDelete = "./public/picFolder/" + photo.photo_url.replace("\\picFolder\\","");
                 fs.unlink(imgPathToDelete, (err) => {
                     if (err) {
                         console.log("failed to delete local image:" + err);
