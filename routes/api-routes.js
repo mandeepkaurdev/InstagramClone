@@ -23,7 +23,7 @@ module.exports = function (app) {
                 var files = fs.readdirSync(folderPath);
                 let displayPhotos = [];
                 photos.forEach((e,index) => {                                     
-                 let photoName = (e.photo_url).replace("\\myPicFolder\\", "");
+                 let photoName = (e.photo_url).replace("/myPicFolder/", "");
 
                  if(files.find(file => file == photoName)) 
                  {
