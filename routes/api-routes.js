@@ -7,7 +7,7 @@ const path = require('path')
 const folderPath = './public/myPicFolder/'
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'public/myPicFolder');
+        cb(null, './public/myPicFolder');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + file.originalname);
