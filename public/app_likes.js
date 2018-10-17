@@ -1,20 +1,48 @@
-$(document).ready(function(){
-$('.red').hide();
+$(document).ready(function () {
+    $('.red').hide();
 
-$(function(){
+    const getLikes = function () {
+        $.ajax({ url: '/api/likes', method: 'GET' })
+            .then(function (getLikes) {
+                //loop through getLikes
+                //for each like object, grab its corresponding heart
+                //check to see if this like object is true or false
+                //if true, show the red heart and hide empty heart
+                //if false, vice versa
+            });
+
+    }
+    getLikes();
+
     $(document).on('click', '.red', function (event) {
-        const iconId = '#'+ event.target.id;
-        const empty = iconId.split("_")[0]+"_empty";
-        const red = iconId.split("_")[0]+"_red";
+        $(this).data('isLiked', false);
+        const iconId = '#' + event.target.id;
+        const empty = iconId.split("_")[0] + "_empty";
+        const red = iconId.split("_")[0] + "_red";
         $(red).hide();
         $(empty).show();
     });
     $(document).on('click', '.empty', function (event) {
-        const iconId = '#'+ event.target.id;
-        const empty = iconId.split("_")[0]+"_empty";
-        const red = iconId.split("_")[0]+"_red";   
+        $(this).data('isLiked', true);
+        const iconId = '#' + event.target.id;
+        const empty = iconId.split("_")[0] + "_empty";
+        const red = iconId.split("_")[0] + "_red";
         $(red).show();
         $(empty).hide();
     });
-})
+
+    const updateLikes = function (e) {
+        console.log($(this).data('isLiked'));
+        const isLiked = $(this).data('isLiked');
+        const mongoId = $(this).attr('id').split("_")[0];
+        console.log(mongoId);
+        const likeData = { isLiked: isLiked, _id: mongoId };
+        $.ajax({ url: '/api/likes', method: 'POST', data: likeData })
+            .then(function (updateLikes) {
+                console.log(updateLikes);
+        })
+    }
+
+    $(document).on('click', '.red', updateLikes);
+    $(document).on('click', '.empty', updateLikes);
 })
