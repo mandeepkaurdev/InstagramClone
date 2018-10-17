@@ -6,14 +6,14 @@ const fs = require('fs');
 const path = require('path')
 const folderPath = './public/myPicFolder/'
 const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
+    destination: function (req, file, cb) {
         cb(null, 'public/myPicFolder');
     },
-    filename: function(req, file, cb) {
-        cb(null, Date.now() + file.originalname);   
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + file.originalname);
     }
 });
-const upload = multer({storage: storage});
+const upload = multer({ storage: storage });
 
 module.exports = function (app) {
 
@@ -38,7 +38,7 @@ module.exports = function (app) {
     });
 
     app.post('/api/photo', upload.single('inputUploadPhoto'), function (req, res, next) {
-        db.photos.create({"photo_url": (req.file.path).replace('public', '')})
+        db.photos.create({ "photo_url": (req.file.path).replace('public', '') })
             .then(function (photos) {
                 res.redirect(req.protocol + '://' + req.get('host'));
             })
@@ -49,14 +49,22 @@ module.exports = function (app) {
     });
 
     app.delete('/api/photo/:index', function (req, res) {
+<<<<<<< HEAD
+        console.log(req.params.index);
+        db.photos.findByIdAndDelete({ _id: req.params.index })
+            .then(function (photo) {
+                let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\", "");
+                console.log(imgPathToDelete);
+=======
         db.photos.findByIdAndDelete({_id: req.params.index})
             .then(function (photo) {
                 let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\","");
+>>>>>>> 911eb7e94663dc53defee0294b67365cfc2a4433
                 fs.unlink(imgPathToDelete, (err) => {
                     if (err) {
-                        console.log("failed to delete local image:"+err);
+                        console.log("failed to delete local image:" + err);
                     } else {
-                        console.log('successfully deleted local image');                                
+                        console.log('successfully deleted local image');
                     }
                 });
                 res.json(photos);
@@ -66,20 +74,11 @@ module.exports = function (app) {
             });
     });
 
-// gina code ends
+    // gina code ends
 
-
-
-
-
-
-
-
-
-
-
-    app.post('/api/likes', function (req, res) {
-        db.likes.create(req.body)
+    // vlee code starts
+    app.get('/api/likes', function (req, res) {
+        db.likes.find({})
             .then(function (likes) {
                 res.json(likes);
             })
@@ -87,6 +86,25 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
+
+    app.post("/api/likes", function (req, res) {
+        db.likes.create({ likes: req.body.isLiked })
+            .then(function (dbLikes) {
+                return db.photos.findOneAndUpdate({ _id: req.body._id }, { $push: { likes: dbLikes._id } }, { new: true });
+            })
+            .then(function (dbLikes) {
+                res.json(dbLikes);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
+    // working on - not required    
+    //app.delete("/api/likes", function(req, res) {
+    //     db.likes.deleteMany({})
+    // });
+    // vlee code ends
 
     app.post('/api/comments', function (req, res) {
         // console.log('api-route line 40: ')
@@ -98,14 +116,14 @@ module.exports = function (app) {
              photo_url: '15675645647647.jpg'
         }*/
 
-        db.eachComment.create({userComment: req.body.userComment})
-        // db.eachComment.create({comments: req.body.eachComment})
-        .then(function (comments) {
+        db.eachComment.create({ userComment: req.body.userComment })
+            // db.eachComment.create({comments: req.body.eachComment})
+            .then(function (comments) {
                 res.json(comments);
-            return db.photos.findOneAndUpdate({photo_url: req.body.photo_url}, { $push: { comments: comments._id } }, { new: true })
+                return db.photos.findOneAndUpdate({ photo_url: req.body.photo_url }, { $push: { comments: comments._id } }, { new: true })
 
             })
-            .then(function (photos){
+            .then(function (photos) {
                 res.json(photos)
             })
             .catch(function (err) {
@@ -117,15 +135,7 @@ module.exports = function (app) {
 
 
 
-    app.get('/api/likes', function (req, res) {
-        db.likes.find({})
-            .then(function (likes) {
-                res.json(likes);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
+
 
     app.get('/api/comments', function (req, res) {
         db.eachComment.find({})
@@ -141,15 +151,7 @@ module.exports = function (app) {
 
 
 
-    app.delete('/api/likes', function (req, res) {
-        db.likes.findOneAndDelete(req.body)
-            .then(function (likes) {
-                res.json(likes);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
+
 
     app.delete('/api/comments', function (req, res) {
         db.comments.findOneAndDelete(req.body)
@@ -163,25 +165,6 @@ module.exports = function (app) {
 
 
 
-    app.put('/api/photos', function (req, res) {
-        db.photos.findOneAndUpdate({ _id: req.body._id }, { set: { photos: req.body.photos } })
-            .then(function (photos) {
-                res.json(photos);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
-
-    app.put('/api/likes', function (req, res) {
-        db.likes.findOneAndUpdate({ _id: req.body._id }, { set: { likes: req.body.likes } })
-            .then(function (likes) {
-                res.json(likes);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
 
     app.put('/api/comments', function (req, res) {
         db.comments.findOneAndUpdate({ _id: req.body._id }, { set: { comments: req.body.comments } })
