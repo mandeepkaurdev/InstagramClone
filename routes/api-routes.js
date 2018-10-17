@@ -3,6 +3,8 @@ const db = require('../models/index');
 // gina code starts
 const multer = require('multer');
 const fs = require('fs');
+const path = require('path')
+const folderPath = './public/myPicFolder/'
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'public/myPicFolder');
@@ -13,13 +15,22 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-
 module.exports = function (app) {
 
     app.get('/api/photos', function (req, res) {
-        db.photos.find({})
+        db.photos.find({}).sort({photo_url: -1})
             .then(function (photos) {
-                res.json(photos);
+                var files = fs.readdirSync(folderPath);
+                let displayPhotos = [];
+                photos.forEach((e,index) => {                                     
+                 let photoName = (e.photo_url).replace("\\myPicFolder\\", "");
+
+                 if(files.find(file => file == photoName)) 
+                 {
+                     displayPhotos.push(e);
+                 }               
+                });                             
+                res.json(displayPhotos);
             })
             .catch(function (err) {
                 res.json(err);
@@ -29,24 +40,27 @@ module.exports = function (app) {
     app.post('/api/photo', upload.single('inputUploadPhoto'), function (req, res, next) {
         db.photos.create({ "photo_url": (req.file.path).replace('public', '') })
             .then(function (photos) {
-                //console.log((req.file.path).replace('public', ''));
-                res.json(photos);
+                res.redirect(req.protocol + '://' + req.get('host'));
             })
             .catch(function (err) {
                 res.json(err);
             });
-
-        res.redirect(req.protocol + '://' + req.get('host'));
+            
     });
 
     app.delete('/api/photo/:index', function (req, res) {
+<<<<<<< HEAD
         console.log(req.params.index);
         db.photos.findByIdAndDelete({ _id: req.params.index })
             .then(function (photo) {
                 let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\", "");
                 console.log(imgPathToDelete);
+=======
+        db.photos.findByIdAndDelete({_id: req.params.index})
+            .then(function (photo) {
+                let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\","");
+>>>>>>> 911eb7e94663dc53defee0294b67365cfc2a4433
                 fs.unlink(imgPathToDelete, (err) => {
-                    console.log("here fs.unlink");
                     if (err) {
                         console.log("failed to delete local image:" + err);
                     } else {
