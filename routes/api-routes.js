@@ -49,17 +49,9 @@ module.exports = function (app) {
     });
 
     app.delete('/api/photo/:index', function (req, res) {
-<<<<<<< HEAD
-        console.log(req.params.index);
-        db.photos.findByIdAndDelete({ _id: req.params.index })
-            .then(function (photo) {
-                let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\", "");
-                console.log(imgPathToDelete);
-=======
         db.photos.findByIdAndDelete({_id: req.params.index})
             .then(function (photo) {
                 let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\","");
->>>>>>> 911eb7e94663dc53defee0294b67365cfc2a4433
                 fs.unlink(imgPathToDelete, (err) => {
                     if (err) {
                         console.log("failed to delete local image:" + err);
