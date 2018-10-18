@@ -1,6 +1,8 @@
 $(document).ready(function(){
     $(function () {
 
+
+
     const allComments = function () {
         $.ajax({ url: '/api/photos', method: 'GET'})
             .then(function (commentsForEach) {
