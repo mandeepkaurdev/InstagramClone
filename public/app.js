@@ -31,22 +31,20 @@ $(function () {
                             content += ` <i class="fas fa-heart red" style="display:none; color: red;" id=${e._id}_red></i>
                             <i class="far fa-heart empty" id=${e._id}_empty></i>`
                         }
-
-                        content += `&nbsp;
+                            content += `&nbsp;
                         <i class="far fa-comment"></i>
                         <button photoId='${e._id}' class='remove big-icon'><i class="fas fa-times"></i></button>
                         </div>`
 
 
                         //Comments display logic
-                        content += '<div class="allComments">';
-                        e.comments.forEach(cmt => {
-                            content += `<div>${cmt.userComment}</div>`
-                        })
-                        content += `</div> <div class="commentInput">
-                                <input type="text" placeholder="place your comment here" class="newComment" />
-                                <input type="submit" class="post"  /></div> 
-                                <div style="height: 50px"></div>`
+                        content += `<div class="allComments" id='${e._id}_divForComments' data-photourl="${e._id}"></div>`;
+                        content +=   `<div class="commentInput">
+                        <form onsubmit="enterKey()">
+                        <input type="text" placeholder="place your comment here" class="newComment" id="${e._id}_input"/>
+                        <input type="submit" class="post" data-id="${e._id}"/>
+                        </form></div> 
+                        <div style="height: 50px"></div>`
                     }
                     );
                 }
@@ -58,6 +56,7 @@ $(function () {
     };
 
 
+
     displayContent();
 
     $('#addPhoto').on("click", function () { $('#inputUploadPhoto').click(); });
@@ -65,9 +64,11 @@ $(function () {
 
     $('#galleryList').on('click', '.remove', function () {
 
-        //$.ajax({url: "/api/photo/" + $(this).attr('photoId'), method: "DELETE" })
         $.ajax({ url: `/api/photo/${$(this).attr('photoId')}`, method: "DELETE" })
             .then(function (data) {
+                //need this reload to show comments from get function 
+                window.location.reload(true);
+                // //////////////////
                 console.log('deleted');
                 displayContent();
             });
@@ -75,3 +76,4 @@ $(function () {
 
 
 })
+

@@ -229,24 +229,30 @@ img {
 
 /* Jules-css-starts */
 input[type="text"] {
-    width: 80%;
-    height: 40px;
+    width: 90%;
+    height: 60px;
+    padding-left: 10px;
     padding-right: 50px;
     border: none;
 }
 
 input[type="submit"] {
     margin-left: -3.5px;
-    height: 40px;
-    width: 20%;
-    color: gray;
+    height: 60px;
+    width: 10%;
+    color: white;
     border: none;
     background-color: white;
 }
 .allComments {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: black;
   background-color: white;
+}
+
+.DBComments {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 /* Jules-css-ends */
 
@@ -350,4 +356,7 @@ i {
       display: block;
   }
 
+}
+b{
+  font-weight: bold;
 }

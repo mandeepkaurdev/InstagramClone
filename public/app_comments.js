@@ -1,39 +1,41 @@
-$(function () {
+$(document).ready(function(){
+    $(function () {
 
-        
+
+
     const allComments = function () {
-        $.ajax({ url: '/api/comments', method: 'GET' })
-            .then(function (allComments) {
-                console.log("app_comments.js allcomments: ");
-                console.log(allComments);
-                let htmlstr = '';
-               allComments.forEach(e => {
-                    htmlstr += `<div> ${e.userComment}`
-               })
-               $('.allComments').html(htmlstr)
-                
+        $.ajax({ url: '/api/photos', method: 'GET'})
+            .then(function (commentsForEach) {
+                commentsForEach.forEach(eachPic => {
+                    eachPic.comments.forEach( eachCommentOnPic => {
+                        // console.log("line 10 app_comments.js: "+ eachCommentOnPic.userComment)
+                        $(`#${eachPic._id}_divForComments`).append($(`<div class="DBComments"><b>Instagram_Clone:</b> ${eachCommentOnPic.userComment}</div>`))
+                    })
+                })
              })
-            
             }
-           // allComments();
+           allComments();
 
-    const postItem = function (allComment) {
+    const postItem = function (allComment, photoid, theComment) {
         //add photo_url to the object below
-        const userData = {userComment : allComment}
-        $.ajax({ url: '/api/comments', method: 'POST', data:userData })
+        $.ajax({ url: '/api/comments', method: 'POST', data:allComment})
             .then(function () {
-                console.log('submitted comment: '+ allComment)
-                $('.allComments').append($(`<div> ${$('.newComment').val()}</div>`))
-            })
+                // console.log('submitted comment: ', allComment)
+                $(`#${photoid}_divForComments`).append($(`<div class="DBComments"><b>Instagram_Clone:</b> ${theComment}</div>`));
+            });
+    };
+   
+    $('.container').on('click','.post', function (event) {
+        event.preventDefault();
+        const photoid = $(this).data('id'); 
+        const val = $(`#${photoid}_input`).val()
+        const obj = {
+            userComment: val,
+            photo_id: photoid
+        };
 
-
-        $('.allComments')
-    }
-
-    $('.container').on('click','.post', function () {    
-        const val = $('.newComment').val()
-        postItem(val)
-
-      
+        postItem(obj,photoid, val)      
+        $(`#${photoid}_input`).val('');
     });
+});
 });
