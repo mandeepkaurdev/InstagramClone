@@ -15,7 +15,7 @@ $(function () {
              })
             
             }
-            allComments();
+           // allComments();
 
     const postItem = function (allComment) {
         //add photo_url to the object below
