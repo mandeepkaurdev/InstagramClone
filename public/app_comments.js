@@ -1,19 +1,16 @@
 $(document).ready(function(){
     $(function () {
 
-
-
     const allComments = function () {
         $.ajax({ url: '/api/photos', method: 'GET'})
-            .then(function (allPhotos) {
-                allPhotos.forEach(eachPic => {
+            .then(function (commentsForEach) {
+                commentsForEach.forEach(eachPic => {
                     eachPic.comments.forEach( eachCommentOnPic => {
-                        console.log("line 10 app_comments.js: "+ eachCommentOnPic.userComment)
-                        $(`#${eachPic._id}_divForComments`).append($(`<div class="DBComments">InstagramClone ${eachCommentOnPic.userComment}</div>`))
+                        // console.log("line 10 app_comments.js: "+ eachCommentOnPic.userComment)
+                        $(`#${eachPic._id}_divForComments`).append($(`<div class="DBComments">Instagram_Clone: ${eachCommentOnPic.userComment}</div>`))
                     })
                 })
              })
-            
             }
             allComments();
 
@@ -21,11 +18,11 @@ $(document).ready(function(){
         //add photo_url to the object below
         $.ajax({ url: '/api/comments', method: 'POST', data:allComment})
             .then(function () {
-                console.log('submitted comment: ', allComment)
-                $(`#${photoid}_divForComments`).append($(`<div class="DBComments">InstagramClone ${theComment}</div>`))
-            })
-    }
-
+                // console.log('submitted comment: ', allComment)
+                $(`#${photoid}_divForComments`).append($(`<div class="DBComments">Instagram_Clone: ${theComment}</div>`));
+            });
+    };
+   
     $('.container').on('click','.post', function (event) {
         event.preventDefault();
         const photoid = $(this).data('id'); 
@@ -33,10 +30,9 @@ $(document).ready(function(){
         const obj = {
             userComment: val,
             photo_id: photoid
-            
-        }
+        };
+
         postItem(obj,photoid, val)      
     });
-
 });
-})
+});
