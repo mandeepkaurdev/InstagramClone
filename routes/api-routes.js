@@ -20,7 +20,6 @@ module.exports = function (app) {
         db.photos.find({})
             .populate('comments')
             .then(function (photos) {
-                console.log(photos)
                 res.json(photos);
             })
             .catch(function (err) {

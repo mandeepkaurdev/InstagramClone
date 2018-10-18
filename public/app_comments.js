@@ -3,19 +3,19 @@ $(document).ready(function(){
 
 
 
-    // const allComments = function () {
-    //     $.ajax({ url: '/api/photos', method: 'GET'})
-    //         .then(function (allPhotos) {
-    //             allPhotos.forEach(eachPic => {
-    //                 eachPic.comments.forEach( eachCommentOnPic => {
-    //                     console.log("line 10 app_comments.js: "+ eachCommentOnPic.userComment)
-    //                     $(`#${eachPic.id}_divForComments`).append($(`<div class="DBComments">InstagramClone ${eachCommentOnPic.userComment}</div>`))
-    //                 })
-    //             })
-    //          })
+    const allComments = function () {
+        $.ajax({ url: '/api/photos', method: 'GET'})
+            .then(function (allPhotos) {
+                allPhotos.forEach(eachPic => {
+                    eachPic.comments.forEach( eachCommentOnPic => {
+                        console.log("line 10 app_comments.js: "+ eachCommentOnPic.userComment)
+                        $(`#${eachPic._id}_divForComments`).append($(`<div class="DBComments">InstagramClone ${eachCommentOnPic.userComment}</div>`))
+                    })
+                })
+             })
             
-    //         }
-    //         allComments();
+            }
+            allComments();
 
     const postItem = function (allComment, photoid, theComment) {
         //add photo_url to the object below
@@ -37,13 +37,6 @@ $(document).ready(function(){
         }
         postItem(obj,photoid, val)      
     });
-
-//   function enterKey(event){
-//       event.preventDefault()
-//     //   if (event.keyCode == 13){
-//           console.log(1)
-//     //   }
-//   }
 
 });
 })
