@@ -31,8 +31,7 @@ $(function () {
                             content += ` <i class="fas fa-heart red" style="display:none; color: red;" id=${e._id}_red></i>
                             <i class="far fa-heart empty" id=${e._id}_empty></i>`
                         }
-
-                        content += `&nbsp;
+                            content += `&nbsp;
                         <i class="far fa-comment"></i>
                         <button photoId='${e._id}' class='remove big-icon'><i class="fas fa-times"></i></button>
                         </div>`
