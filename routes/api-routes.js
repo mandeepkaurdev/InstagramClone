@@ -6,11 +6,11 @@ const fs = require('fs');
 const path = require('path')
 const folderPath = './public/myPicFolder/'
 const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, 'public/myPicFolder');
+    destination: function (req, file, cb) {
+        cb(null, './public/myPicFolder/');
     },
-    filename: function(req, file, cb) {
-        cb(null, Date.now() + file.originalname);   
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + file.originalname);
     }
 });
 const upload = multer({storage: storage});
@@ -23,7 +23,17 @@ module.exports = function (app) {
             .populate("likes","likes")
             .populate("comments","userComment")
             .then(function (photos) {
-                res.json(photos);
+                var files = fs.readdirSync(folderPath);
+                let displayPhotos = [];
+                photos.forEach((e,index) => {                                     
+                 let photoName = (e.photo_url).split('/')[2];
+
+                 if(files.find(file => file == photoName)) 
+                 {
+                     displayPhotos.push(e);
+                 }               
+                });                             
+                res.json(displayPhotos);
             })
             .catch(function (err) {
                 res.json(err);
@@ -31,7 +41,7 @@ module.exports = function (app) {
     });
 
     app.post('/api/photo', upload.single('inputUploadPhoto'), function (req, res, next) {
-        db.photos.create({"photo_url": (req.file.path).replace('public', '')})
+        db.photos.create({ "photo_url": (req.file.path).replace('public', '') })
             .then(function (photos) {
                 res.redirect(req.protocol + '://' + req.get('host'));
             })
@@ -47,9 +57,9 @@ module.exports = function (app) {
                 let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\","");
                 fs.unlink(imgPathToDelete, (err) => {
                     if (err) {
-                        console.log("failed to delete local image:"+err);
+                        console.log("failed to delete local image:" + err);
                     } else {
-                        console.log('successfully deleted local image');                                
+                        console.log('successfully deleted local image');
                     }
                 });
                 res.json(photos);
@@ -98,16 +108,22 @@ app.post('/api/likes', function (req, res) {
         res.json(err);
     });
 });
-    // app.post('/api/likes', function (req, res) {
-    //     db.likes.create(req.body)
-    //         .then(function (likes) {
-    //             res.json(likes);
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-    // });
+
 // vlee code ends
+
+
+    app.post("/api/likes", function (req, res) {
+        db.likes.create({ likes: req.body.isLiked })
+            .then(function (dbLikes) {
+                return db.photos.findOneAndUpdate({ _id: req.body._id }, { $push: { likes: dbLikes._id } }, { new: true });
+            })
+            .then(function (dbLikes) {
+                res.json(dbLikes);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
 
 
     app.post('/api/comments', function (req, res) {
@@ -120,14 +136,14 @@ app.post('/api/likes', function (req, res) {
              photo_url: '15675645647647.jpg'
         }*/
 
-        db.eachComment.create({userComment: req.body.userComment})
-        // db.eachComment.create({comments: req.body.eachComment})
-        .then(function (comments) {
+        db.eachComment.create({ userComment: req.body.userComment })
+            // db.eachComment.create({comments: req.body.eachComment})
+            .then(function (comments) {
                 res.json(comments);
-            return db.photos.findOneAndUpdate({photo_url: req.body.photo_url}, { $push: { comments: comments._id } }, { new: true })
+                return db.photos.findOneAndUpdate({ photo_url: req.body.photo_url }, { $push: { comments: comments._id } }, { new: true })
 
             })
-            .then(function (photos){
+            .then(function (photos) {
                 res.json(photos)
             })
             .catch(function (err) {
@@ -135,54 +151,34 @@ app.post('/api/likes', function (req, res) {
             });
     });
 
-    // app.delete('/api/likes', function (req, res) {
-    //     db.likes.findOneAndDelete(req.body)
-    //         .then(function (likes) {
-    //             res.json(likes);
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-    // });
+    app.get('/api/comments', function (req, res) {
+        db.eachComment.find({})
+            .then(function (comments) {
+                res.json(comments);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
 
-    // app.delete('/api/comments', function (req, res) {
-    //     db.comments.findOneAndDelete(req.body)
-    //         .then(function (comments) {
-    //             res.json(comments);
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-    // });
+    app.delete('/api/comments', function (req, res) {
+        db.comments.findOneAndDelete(req.body)
+            .then(function (comments) {
+                res.json(comments);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
 
-    // app.put('/api/photos', function (req, res) {
-    //     db.photos.findOneAndUpdate({ _id: req.body._id }, { set: { photos: req.body.photos } })
-    //         .then(function (photos) {
-    //             res.json(photos);
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-    // });
-
-    // app.put('/api/likes', function (req, res) {
-    //     db.likes.findOneAndUpdate({ _id: req.body._id }, { set: { likes: req.body.likes } })
-    //         .then(function (likes) {
-    //             res.json(likes);
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-    // });
-
-    // app.put('/api/comments', function (req, res) {
-    //     db.comments.findOneAndUpdate({ _id: req.body._id }, { set: { comments: req.body.comments } })
-    //         .then(function (comments) {
-    //             res.json(comments);
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-    // });
+    app.put('/api/comments', function (req, res) {
+        db.comments.findOneAndUpdate({ _id: req.body._id }, { set: { comments: req.body.comments } })
+            .then(function (comments) {
+                res.json(comments);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
 
 };

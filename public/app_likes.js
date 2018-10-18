@@ -24,7 +24,6 @@ $(document).ready(function () {
         const iconId = '#' + event.target.id;
         const empty = iconId.split("_")[0] + "_empty";
         const red = iconId.split("_")[0] + "_red";
-        console.log('testGina: ' + iconId.split("_")[0] + "_empty");
         $(red).show();
         $(empty).hide();
     });
@@ -34,11 +33,11 @@ $(document).ready(function () {
         const isLiked = $(this).data('isLiked');
         const mongoId = $(this).attr('id').split("_")[0];
         console.log(mongoId);
-        const likeData = {isLiked: isLiked, _id: mongoId};
-        $.ajax({ url: '/api/likes', method: 'POST', data: likeData})
+        const likeData = { isLiked: isLiked, _id: mongoId };
+        $.ajax({ url: '/api/likes', method: 'POST', data: likeData })
             .then(function (updateLikes) {
-        console.log(updateLikes);
-            })
+                console.log(updateLikes);
+        })
     }
 
     $(document).on('click', '.red', updateLikes);
