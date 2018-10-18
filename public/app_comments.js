@@ -9,19 +9,19 @@ $(document).ready(function(){
                 commentsForEach.forEach(eachPic => {
                     eachPic.comments.forEach( eachCommentOnPic => {
                         // console.log("line 10 app_comments.js: "+ eachCommentOnPic.userComment)
-                        $(`#${eachPic._id}_divForComments`).append($(`<div class="DBComments">Instagram_Clone: ${eachCommentOnPic.userComment}</div>`))
+                        $(`#${eachPic._id}_divForComments`).append($(`<div class="DBComments"><b>Instagram_Clone:</b> ${eachCommentOnPic.userComment}</div>`))
                     })
                 })
              })
             }
-            allComments();
+           allComments();
 
     const postItem = function (allComment, photoid, theComment) {
         //add photo_url to the object below
         $.ajax({ url: '/api/comments', method: 'POST', data:allComment})
             .then(function () {
                 // console.log('submitted comment: ', allComment)
-                $(`#${photoid}_divForComments`).append($(`<div class="DBComments">Instagram_Clone: ${theComment}</div>`));
+                $(`#${photoid}_divForComments`).append($(`<div class="DBComments"><b>Instagram_Clone:</b> ${theComment}</div>`));
             });
     };
    
@@ -35,6 +35,7 @@ $(document).ready(function(){
         };
 
         postItem(obj,photoid, val)      
+        $(`#${photoid}_input`).val('');
     });
 });
 });

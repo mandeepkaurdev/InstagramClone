@@ -3,6 +3,7 @@ const db = require('../models/index');
 // gina code starts
 const multer = require('multer');
 const fs = require('fs');
+const path = require('path')
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, 'public/myPicFolder');
@@ -13,12 +14,13 @@ const storage = multer.diskStorage({
 });
 const upload = multer({storage: storage});
 
-
 module.exports = function (app) {
 
     app.get('/api/photos', function (req, res) {
-        db.photos.find({})
-            .populate('comments')
+        db.photos.find({})      
+            .sort({photo_url: -1})
+            .populate("likes","likes")
+            .populate('comments') 
             .then(function (photos) {
                 res.json(photos);
             })
@@ -30,24 +32,19 @@ module.exports = function (app) {
     app.post('/api/photo', upload.single('inputUploadPhoto'), function (req, res, next) {
         db.photos.create({"photo_url": (req.file.path).replace('public', '')})
             .then(function (photos) {
-                //console.log((req.file.path).replace('public', ''));
-                res.json(photos);
+                res.redirect(req.protocol + '://' + req.get('host'));
             })
             .catch(function (err) {
                 res.json(err);
             });
-
-        res.redirect(req.protocol + '://' + req.get('host'));
+            
     });
 
     app.delete('/api/photo/:index', function (req, res) {
-        console.log(req.params.index);
         db.photos.findByIdAndDelete({_id: req.params.index})
             .then(function (photo) {
                 let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\","");
-                console.log(imgPathToDelete);
                 fs.unlink(imgPathToDelete, (err) => {
-                    console.log("here fs.unlink");
                     if (err) {
                         console.log("failed to delete local image:"+err);
                     } else {

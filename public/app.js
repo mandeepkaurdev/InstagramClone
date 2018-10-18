@@ -1,4 +1,4 @@
-$(function(){
+$(function () {
     function render(userContent) {
         $('#galleryList').html(userContent);
     }
