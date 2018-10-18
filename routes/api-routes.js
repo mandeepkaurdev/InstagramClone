@@ -13,12 +13,15 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + file.originalname);
     }
 });
-const upload = multer({ storage: storage });
+const upload = multer({storage: storage});
 
 module.exports = function (app) {
 
     app.get('/api/photos', function (req, res) {
-        db.photos.find({}).sort({photo_url: -1})
+        db.photos.find({})            
+            .sort({photo_url: -1})
+            .populate("likes","likes")
+            .populate("comments","userComment")
             .then(function (photos) {
                 var files = fs.readdirSync(folderPath);
                 let displayPhotos = [];
@@ -66,18 +69,48 @@ module.exports = function (app) {
             });
     });
 
-    // gina code ends
+// gina code ends
 
-    // vlee code starts
-    app.get('/api/likes', function (req, res) {
-        db.likes.find({})
-            .then(function (likes) {
-                res.json(likes);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
+
+
+// vlee code starts
+
+app.get('/api/likes', function (req, res) {
+    db.likes.find({})
+        .then(function (likes) {
+            res.json(likes);
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
+});
+
+app.get('/api/comments', function (req, res) {
+    db.eachComment.find({})
+        .then(function (comments) {
+            res.json(comments);
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
+});
+
+app.post('/api/likes', function (req, res) {
+    console.log(req.body);
+    db.likes.create({likes:req.body.isLiked})
+    .then(function(dblike){
+        return db.photos.findOneAndUpdate({_id:req.body._id},{$push:{likes: dblike._id}},{new:true});
+    })
+    .then(function(dbPhoto){
+        res.json(dbPhoto);
+    })
+    .catch(function (err) {
+        res.json(err);
     });
+});
+
+// vlee code ends
+
 
     app.post("/api/likes", function (req, res) {
         db.likes.create({ likes: req.body.isLiked })
@@ -92,11 +125,6 @@ module.exports = function (app) {
             });
     });
 
-    // working on - not required    
-    //app.delete("/api/likes", function(req, res) {
-    //     db.likes.deleteMany({})
-    // });
-    // vlee code ends
 
     app.post('/api/comments', function (req, res) {
         // console.log('api-route line 40: ')
@@ -123,12 +151,6 @@ module.exports = function (app) {
             });
     });
 
-
-
-
-
-
-
     app.get('/api/comments', function (req, res) {
         db.eachComment.find({})
             .then(function (comments) {
@@ -139,12 +161,6 @@ module.exports = function (app) {
             });
     });
 
-
-
-
-
-
-
     app.delete('/api/comments', function (req, res) {
         db.comments.findOneAndDelete(req.body)
             .then(function (comments) {
@@ -154,9 +170,6 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
-
-
-
 
     app.put('/api/comments', function (req, res) {
         db.comments.findOneAndUpdate({ _id: req.body._id }, { set: { comments: req.body.comments } })

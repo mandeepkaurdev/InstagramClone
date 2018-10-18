@@ -1,18 +1,15 @@
 $(document).ready(function () {
     $('.red').hide();
 
-    const getLikes = function () {
-        $.ajax({ url: '/api/likes', method: 'GET' })
-            .then(function (getLikes) {
-                //loop through getLikes
-                //for each like object, grab its corresponding heart
-                //check to see if this like object is true or false
-                //if true, show the red heart and hide empty heart
-                //if false, vice versa
-            });
 
-    }
-    getLikes();
+       const getLikes = function () {
+            $.ajax({ url: '/api/likes', method: 'GET' })
+                .then(function (getLikes) {
+
+                });
+
+        }
+        //getLikes();
 
     $(document).on('click', '.red', function (event) {
         $(this).data('isLiked', false);

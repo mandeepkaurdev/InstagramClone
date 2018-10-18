@@ -6,7 +6,7 @@ const likesSchema = new Schema({
 
   likes: {
     type: Boolean,
-    default: false
+    // default: false
   }
 });
 
