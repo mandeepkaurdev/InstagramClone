@@ -1,9 +1,20 @@
+/**
+ * @fileoverview APIs to get, post, and delete photos along with associated comments & likes. 
+ * @author Gina Yi
+ */
 const db = require('../models/index');
-
-// gina code starts
+/**
+ * Uses Multer, a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+ * Uses fs, a node.js file system module to work with the file system on Server.
+ */
 const multer = require('multer');
 const fs = require('fs');
-const path = require('path')
+
+/**
+ * Multer Configuration
+ * File destination: public/myPicFolder
+ * File name: current dateTime + file name
+ */
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'public/myPicFolder');
@@ -16,6 +27,11 @@ const upload = multer({ storage: storage });
 
 module.exports = function (app) {
 
+    /**
+     * API to get all photos
+     * @returns {json} photos - Returns all photos with associated comments and likes if successful and returns err on error.
+     * 
+     */
     app.get('/api/photos', function (req, res) {
         db.photos.find({})
             .sort({ photo_url: -1 })
@@ -29,21 +45,30 @@ module.exports = function (app) {
             });
     });
 
+    /**
+     * API to post a photo
+     * @param {obj} req contains file object to post
+     * @return {obj} response.redirect to default page
+     */
     app.post('/api/photo', upload.single('inputUploadPhoto'), function (req, res, next) {
-        db.photos.create({ "photo_url": (req.file.path).replace('public', '') })
+        db.photos.create({"photo_url": (req.file.path).replace('public', '')})
             .then(function (photos) {
                 res.redirect(req.protocol + '://' + req.get('host'));
             })
             .catch(function (err) {
                 res.json(err);
-            });
-
+            });          
     });
 
+    /**
+     * API to delete a photo
+     * @param {obj} req.params.index contains photoID to delete
+     * @return {obj} Returns deleted photo object
+     */
     app.delete('/api/photo/:index', function (req, res) {
         db.photos.findByIdAndDelete({ _id: req.params.index })
             .then(function (photo) {
-                let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\", "");
+                let imgPathToDelete = "./public/myPicFolder/" + photo.photo_url.replace("\\myPicFolder\\","");
                 fs.unlink(imgPathToDelete, (err) => {
                     if (err) {
                         console.log("failed to delete local image:" + err);
@@ -51,17 +76,19 @@ module.exports = function (app) {
                         console.log('successfully deleted local image');
                     }
                 });
-                res.json(photos);
+                res.json(photo);
             })
             .catch(function (err) {
                 res.json(err);
             });
     });
 
-    // gina code ends
-
+    /**
+     * API to post like
+     * @param {obj} req.body.isLiked contains like to post
+     * @return {obj} Returns a photo object associated with the like
+     */
     app.post('/api/likes', function (req, res) {
-        console.log(req.body);
         db.likes.create({ likes: req.body.isLiked })
             .then(function (dblike) {
                 return db.photos.findOneAndUpdate({ _id: req.body._id }, { $push: { likes: dblike._id } }, { new: true });
@@ -74,102 +101,22 @@ module.exports = function (app) {
             });
     });
 
-
+    /**
+     * API to post a comment
+     * @param {obj} req.body.userComment contains a userComment to post
+     * @return {obj} Returns a photo object assoicated with the comment
+     */
     app.post('/api/comments', function (req, res) {
-        //we need req.body to have userComment and also photoUrl
-        /*{
-             userComment: "I like this photo",
-             photo_id: '15675645647647.jpg'
-        }*/
         db.eachComment.create({ userComment: req.body.userComment })
             .then(function (comments) {
                 return db.photos.findOneAndUpdate({ _id: req.body.photo_id }, { $push: { comments: comments._id } }, { new: true })
-
             })
-
             .then(function (photos) {
                 res.json(photos)
             })
             .catch(function (err) {
                 res.json(err);
             });
-    });
-
-    app.get('/api/likes', function (req, res) {
-        db.likes.find({})
-            .then(function (likes) {
-                res.json(likes);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
-
-    app.get('/api/comments', function (req, res) {
-        db.eachComment.find({})
-
-            .then(function (comments) {
-                res.json(comments);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
-
-
-
-
-
-    app.delete('/api/likes', function (req, res) {
-        db.likes.findOneAndDelete(req.body)
-            .then(function (likes) {
-                res.json(likes);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
-
-    app.delete('/api/comments', function (req, res) {
-        db.comments.findOneAndDelete(req.body)
-            .then(function (comments) {
-                res.json(comments);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
-
-
-
-    app.put('/api/photos', function (req, res) {
-        db.photos.findOneAndUpdate({ _id: req.body._id }, { set: { photos: req.body.photos } })
-            .then(function (photos) {
-                res.json(photos);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
-
-    app.put('/api/likes', function (req, res) {
-        db.likes.findOneAndUpdate({ _id: req.body._id }, { set: { likes: req.body.likes } })
-            .then(function (likes) {
-                res.json(likes);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
-
-    app.put('/api/comments', function (req, res) {
-        db.comments.findOneAndUpdate({ _id: req.body._id }, { set: { comments: req.body.comments } })
-            .then(function (comments) {
-                res.json(comments);
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
-    });
+    });   
 
 };

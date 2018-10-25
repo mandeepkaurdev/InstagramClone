@@ -27,25 +27,28 @@
           <img src="./Image/leaf.jpg" alt="leaf">
         </div>
 
-
         <div class="profile-user-settings">
           <h1 class="profile-user-name">Instagram_clone</h1>
           <button class="btn profile-edit-btn">Edit Profile</button>
-          <!-- <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button> -->
         </div>
 
 
         <div class="profile-stats">
           <ul>
-            <li><span class="profile-stat-count">277</span> posts</li>
-            <li><span class="profile-stat-count">343</span> followers</li>
-            <li><span class="profile-stat-count">176</span> following</li>
+            <li>
+              <span class="profile-stat-count">277</span> posts</li>
+            <li>
+              <span class="profile-stat-count">343</span> followers</li>
+            <li>
+              <span class="profile-stat-count">176</span> following</li>
           </ul>
         </div>
 
 
         <div class="profile-bio">
-          <p><span class="profile-real-name">Instagram Clone</span></p>
+          <p>
+            <span class="profile-real-name">Instagram Clone</span>
+          </p>
         </div>
 
       </div>
@@ -57,34 +60,40 @@
   <main>
 
     <div class="container">
-
-      <div class="gallery" >
-        <div id="galleryList" class="gallery-item">         
+      <div class="gallery">
+        <div id="galleryList" class="gallery-item">
         </div>
-        
-         
-      </div> 
+      </div>
     </div>
 
-
-      <!-- gina bottom nav start-->
-      <div>
-        <nav class='nav-bottom'>
-          <ul class='nav-ul-bottom'>
-            <li class='nav-li-bottom'><button class='big-icon' onclick="location.href = 'index.html'"><i class="fas fa-home"></i></button></li>
-            <li class='nav-li-bottom'><button class='big-icon' id="addPhoto"><i class="far fa-plus-square"></i></button></li>
-            <li class='nav-li-bottom'><button class='big-icon' onclick="location.href = 'index.html'"><i class="far fa-user"></i></button></li>
-          </ul>
-        </nav>
-      </div>
-      <form id="frmUpload" style="display:none" action="/api/photo" method="post" enctype="multipart/form-data">
-        <input type="file" id="inputUploadPhoto" name="inputUploadPhoto" />
-      </form>
-      <!-- gina bottom nav end-->
+    <div>
+      <nav class='nav-bottom'>
+        <ul class='nav-ul-bottom'>
+          <li class='nav-li-bottom'>
+            <button class='big-icon' onclick="location.href = 'index.html'">
+              <i class="fas fa-home"></i>
+            </button>
+          </li>
+          <li class='nav-li-bottom'>
+            <button class='big-icon' id="addPhoto">
+              <i class="far fa-plus-square"></i>
+            </button>
+          </li>
+          <li class='nav-li-bottom'>
+            <button class='big-icon' onclick="location.href = 'index.html'">
+              <i class="far fa-user"></i>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <form id="frmUpload" style="display:none" action="/api/photo" method="post" enctype="multipart/form-data">
+      <input type="file" id="inputUploadPhoto" name="inputUploadPhoto" />
+    </form>
 
   </main>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <script src="app.js"></script>
   <script src="app_comments.js"></script>
   <script src="app_likes.js"></script>
