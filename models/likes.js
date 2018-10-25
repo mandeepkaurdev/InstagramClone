@@ -4,10 +4,8 @@ const Schema = mongoose.Schema;
 
 const likesSchema = new Schema({
 
-  likes: {
-    type: Boolean,
-    // default: false
-  }
+  likes: Boolean
+  
 });
 
 var likes = mongoose.model("likes", likesSchema);
